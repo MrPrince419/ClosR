@@ -1,37 +1,45 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const pathname = usePathname()
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen((prev) => !prev)
+    if (!isMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isMenuOpen])
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true)
-      } else {
-        setScrolled(false)
-      }
+      const scrollPosition = window.scrollY
+      setScrolled(scrollPosition > 10)
     }
 
-    window.addEventListener("scroll", handleScroll)
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  useEffect(() => {
+    setIsMenuOpen(false)
+    document.body.style.overflow = 'unset'
+  }, [pathname])
 
   return (
     <nav
-      className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "navbar-glass shadow-md" : "bg-white shadow-sm"}`}
-      suppressHydrationWarning
+      className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? "navbar-glass shadow-md" : "bg-white/90 backdrop-blur-sm shadow-sm"}`}
+      role="navigation"
+      aria-label="Main navigation"
     >
       <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
         <div className="flex justify-between h-14 sm:h-16">

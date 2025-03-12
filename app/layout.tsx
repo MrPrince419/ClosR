@@ -107,21 +107,23 @@ export default function RootLayout({
         </Script>
       </head>
       <body className={`${inter.className} min-h-screen flex flex-col`} suppressHydrationWarning>
-        <ThemeProvider>
-          {/* Skip to content link for accessibility */}
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-primary"
-          >
-            Skip to content
-          </a>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Suspense fallback={<LoadingFallback />}>
+            {/* Skip to content link for accessibility */}
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-primary"
+            >
+              Skip to content
+            </a>
 
-          <Navbar />
-          <main id="main-content" className="flex-grow">
-            {children}
-          </main>
-          <Footer />
-          <ScrollToTop />
+            <Navbar />
+            <main id="main-content" className="flex-grow">
+              {children}
+            </main>
+            <Footer />
+            <ScrollToTop />
+          </Suspense>
         </ThemeProvider>
       </body>
     </html>
