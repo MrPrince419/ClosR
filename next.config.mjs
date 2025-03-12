@@ -1,11 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // GitHub Pages deployment settings
-  basePath: '/ClosR',
-  assetPrefix: '/ClosR',
+  basePath: process.env.NODE_ENV === 'production' ? '/ClosR' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/ClosR' : '',
   output: 'export',
-  // Set to true to enable static exports
+  // Enable static exports and ensure proper routing
   trailingSlash: true,
+  distDir: 'out',
   eslint: {
     ignoreDuringBuilds: true,
   },
