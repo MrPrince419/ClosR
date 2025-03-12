@@ -33,7 +33,9 @@ const nextConfig = {
     formats: ['image/webp'],
     minimumCacheTTL: 60,
   },
-  // Add HTTPS redirection
+  // Rewrites and headers are not compatible with static export
+  // Commenting out for GitHub Pages deployment
+  /*
   async rewrites() {
     return [
       {
@@ -49,7 +51,6 @@ const nextConfig = {
       },
     ];
   },
-  // Force HTTPS in production
   async headers() {
     return [
       {
@@ -63,6 +64,7 @@ const nextConfig = {
       },
     ];
   },
+  */
 }
 
 // Import modules at the top level
