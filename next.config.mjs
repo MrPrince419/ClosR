@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // GitHub Pages deployment settings
-  basePath: process.env.NODE_ENV === 'production' ? '/ClosR' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/ClosR/' : '',
+  // GitHub Pages deployment settings with custom domain
+  basePath: '',
+  assetPrefix: ''
   output: 'export',
   // Set to true to enable static exports
   trailingSlash: true,
