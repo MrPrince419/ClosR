@@ -324,6 +324,22 @@ const getBlogPost = (slug: string) => {
   return posts[slug as keyof typeof posts] || null
 }
 
+// Generate static params for all blog posts at build time
+export async function generateStaticParams() {
+  // Get all blog post slugs from the blog page data
+  const slugs = [
+    "ai-automation-nigerian-manufacturing",
+    "roi-ai-solutions-nigerian-businesses",
+    "top-industries-nigeria-ai-disruption",
+    "building-ai-ready-workforce-nigeria"
+  ];
+  
+  // Return an array of objects with the slug parameter
+  return slugs.map((slug) => ({
+    slug: slug,
+  }));
+}
+
 export default function BlogPost({ params }: { params: { slug: string } }) {
   // Unwrap params using React.use() before accessing its properties
   const unwrappedParams = React.use(params);
