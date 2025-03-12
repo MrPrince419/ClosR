@@ -324,20 +324,58 @@ const getBlogPost = (slug: string) => {
   return posts[slug as keyof typeof posts] || null
 }
 
-// Generate static params for all blog posts at build time
 export async function generateStaticParams() {
-  // Get all blog post slugs from the blog page data
-  const slugs = [
-    "ai-automation-nigerian-manufacturing",
-    "roi-ai-solutions-nigerian-businesses",
-    "top-industries-nigeria-ai-disruption",
-    "building-ai-ready-workforce-nigeria"
+  // Return an array of objects with slug parameters for all blog posts
+  return [
+    { slug: "ai-automation-nigerian-manufacturing" },
+    { slug: "roi-ai-solutions-nigerian-businesses" }
   ];
-  
-  // Return an array of objects with the slug parameter
-  return slugs.map((slug) => ({
-    slug: slug,
-  }));
+}
+
+export default function BlogPost({ params }: { params: { slug: string } }) {
+  const post = getBlogPost(params.slug);
+  const readingTime = calculateReadingTime(post.content);
+
+  return (
+    <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <Link href="/blog" className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6">
+        <ArrowLeft className="mr-2" size={20} />
+        Back to Blog
+      </Link>
+      
+      <article className="prose lg:prose-xl max-w-none">
+        <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+        
+        <div className="flex items-center text-gray-600 mb-8">
+          <div className="mr-6">
+            <span className="font-medium">{post.author}</span>
+          </div>
+          <div className="mr-6">{post.date}</div>
+          <div className="flex items-center">
+            <Clock size={16} className="mr-1" />
+            <span>{readingTime} min read</span>
+          </div>
+        </div>
+
+        <div className="relative w-full h-[400px] mb-8">
+          <Image
+            src={post.image}
+            alt={post.title}
+            fill
+            className="object-cover rounded-lg"
+            priority
+          />
+        </div>
+
+        <div dangerouslySetInnerHTML={{ __html: post.content }} />
+      </article>
+
+      <div className="mt-12 border-t pt-8">
+        <h3 className="text-2xl font-bold mb-4">Share this article</h3>
+        <SocialLinks />
+      </div>
+    </div>
+  );
 }
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
