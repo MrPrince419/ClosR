@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // GitHub Pages deployment settings with custom domain
-  basePath: '',
-  assetPrefix: ''
+  // GitHub Pages deployment settings
+  basePath: '/ClosR',
+  assetPrefix: '/ClosR',
   output: 'export',
   // Set to true to enable static exports
   trailingSlash: true,
