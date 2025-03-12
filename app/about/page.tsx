@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { ImageWithFallback } from "@/components/ui/image-with-fallback"
 
 export default function About() {
   return (
@@ -69,13 +70,14 @@ export default function About() {
               <div className="bg-gradient-to-br from-primary/20 to-primary/40 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 p-8 flex items-center justify-center h-[400px]">
                 <div className="text-center">
                   <div className="inline-block rounded-full overflow-hidden h-32 w-32 mb-4 relative">
-                    <Image
+                    <ImageWithFallback
                       src="/images/founder.png"
                       alt="Prince Uwagboe"
                       fill
                       sizes="128px"
                       quality={75}
                       className="object-cover"
+                      fallbackSrc="/placeholder-user.jpg"
                     />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900">Prince Uwagboe</h3>
@@ -281,13 +283,14 @@ export default function About() {
             >
               <div className="aspect-w-1 aspect-h-1 bg-gradient-to-br from-primary/10 to-primary/30 flex items-center justify-center p-8">
                 <div className="h-32 w-32 rounded-full overflow-hidden relative">
-                  <Image
+                  <ImageWithFallback
                     src="/images/founder.png"
                     alt="Prince Uwagboe"
                     fill
                     sizes="128px"
                     quality={75}
                     className="object-cover"
+                    fallbackSrc="/placeholder-user.jpg"
                   />
                 </div>
               </div>
@@ -310,7 +313,7 @@ export default function About() {
             >
               <div className="aspect-w-1 aspect-h-1 bg-gradient-to-br from-accent/10 to-accent/30 flex items-center justify-center p-8">
                 <div className="h-32 w-32 border-4 border-white shadow-lg rounded-full overflow-hidden relative">
-                  <Image 
+                  <ImageWithFallback
                     src="/images/sarah-johnson.png"
                     alt="Sarah Johnson"
                     fill
@@ -318,10 +321,7 @@ export default function About() {
                     quality={75}
                     loading="lazy"
                     className="object-cover"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = "/placeholder-user.jpg";
-                    }}
+                    fallbackSrc="/placeholder-user.jpg"
                   />
                 </div>
               </div>
@@ -344,18 +344,14 @@ export default function About() {
             >
               <div className="aspect-w-1 aspect-h-1 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center p-8">
                 <div className="h-32 w-32 border-4 border-white shadow-lg rounded-full overflow-hidden relative">
-                  <Image 
+                  <ImageWithFallback
                     src="/images/michael-okonkwo.png"
                     alt="Michael Okonkwo"
                     fill
                     sizes="128px"
                     quality={75}
-                    loading="lazy"
                     className="object-cover"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = "/images/founder.png";
-                    }}
+                    fallbackSrc="/placeholder-user.jpg"
                   />
                 </div>
               </div>
