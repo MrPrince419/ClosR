@@ -82,7 +82,7 @@ export default function TestimonialSlider() {
                     className="object-cover"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
-                      target.src = `${basePath}/placeholder-user.jpg`;
+                      target.src = `${basePath}/images/founder.png`;
                     }}
                   />
                 </div>

@@ -7,12 +7,17 @@ const EthereumCheckScript = () => {
     console.error('Error loading ethereum check script:', e);
   };
 
+  const handleLoad = () => {
+    console.log('Ethereum check script loaded successfully');
+  };
+
   return (
     <Script 
       id="ethereum-check" 
       src="/scripts/ethereum-check.js"
-      strategy="beforeInteractive"
+      strategy="afterInteractive"
       onError={handleError}
+      onLoad={handleLoad}
     />
   );
 };

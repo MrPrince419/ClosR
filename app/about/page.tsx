@@ -354,7 +354,7 @@ export default function About() {
                     className="object-cover"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
-                      target.src = "/placeholder-user.jpg";
+                      target.src = "/images/founder.png";
                     }}
                   />
                 </div>
