@@ -15,7 +15,20 @@ const nextConfig = {
   // Ensure images are handled correctly in static export
   images: {
     unoptimized: true,
-    ...nextConfig.images
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'localhost',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+      }
+    ]
   },
   // Add experimental features for better static export support
   experimental: {
@@ -33,21 +46,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: process.env.NODE_ENV === 'production',
   },
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'localhost',
-      },
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-      },
-      {
+
         protocol: 'https',
         hostname: '**.githubusercontent.com',
       },
